@@ -3,12 +3,13 @@ def bellman_ford(graph, start):
     distances = [float('inf')] * num_vertices
     predecessors = [None] * num_vertices
     distances[start-1] = 0
-    H = {vertex: 0 for vertex in range(num_vertices)}
+    H = [0] * num_vertices
     Q = list(range(num_vertices))
     R = list()
+    negative_cycle = False
+    disconnectedNode = False
 
     while Q:
-        disconnectedNode = False
         current_vertex = Q[0]
         vertex_distance = distances[current_vertex]
 
@@ -22,7 +23,9 @@ def bellman_ford(graph, start):
         H[current_vertex] += 1
 
         for value in H:
-            if value >= len(graph): break
+            if value >= len(graph): 
+                negative_cycle = True
+                break
 
         for neighbor in range(num_vertices):
             if vertex_distance != 'inf' and graph[current_vertex][neighbor] != 'inf':
@@ -46,9 +49,9 @@ def bellman_ford(graph, start):
             if distances[vertex] != 'inf':
                 disconnectedNode = False
         if disconnectedNode: break
+        if negative_cycle: break
 
-
-    return distances, predecessors, H
+    return distances, predecessors, H, negative_cycle
 
 
 def bellman_ford_get_path(start, destination, predecessors):

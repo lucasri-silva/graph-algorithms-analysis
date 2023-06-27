@@ -27,7 +27,20 @@ def floyd_warshall(graph):
 def floyd_warshall_get_cost(start, destination, distances):
     return distances[start][destination]
 
-def floyd_warshall_get_path(predecessors, distances):
+def floyd_warshall_get_path(start, destination, predecessors, distances):
+    path = list()
+    pair = (predecessors[start-1][destination-1], destination)
+    path.append(pair)
+
+    while pair[0] != start:
+        pair = (predecessors[start-1][pair[0]-1], pair[0])
+        path.append(pair)
+
+    path.reverse()
+    print(f"Path from {start} to {destination}: {path} , Cost: {floyd_warshall_get_cost(start-1, destination-1, distances)}")
+
+
+def floyd_warshall_get_all_path(predecessors, distances):
     num_nodes = len(predecessors)
     
     for i in range(num_nodes):
