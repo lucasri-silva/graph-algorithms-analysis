@@ -29,15 +29,15 @@ def main():
             answer = int(answer)
             if answer == 1:
 
-                shutil.rmtree('../result/')
-                os.makedirs('../result/')
-                os.makedirs('../result/positive-weight')
-                os.makedirs('../result/positive-negative-weight')
+                shutil.rmtree('./result/')
+                os.makedirs('./result/')
+                os.makedirs('./result/positive-weight')
+                os.makedirs('./result/positive-negative-weight')
 
                 print('Gerando grafos ...')
-                shutil.rmtree('../graphs')
-                os.makedirs('../graphs/positive-weight')
-                os.makedirs('../graphs/positive-negative-weight')
+                shutil.rmtree('./graphs')
+                os.makedirs('./graphs/positive-weight')
+                os.makedirs('./graphs/positive-negative-weight')
 
                 num_graphs = 1
                 pace = 25
@@ -45,7 +45,7 @@ def main():
                 ## generate positive weight graphs
                 num_nodes = 10
                 num_edges = num_nodes * (num_nodes - 1)
-                num_max_nodes = 500
+                num_max_nodes = 100
                 densities = [1.0, 0.9, 0.6, 0.5]
                 weight_range = (1, 100)
                 path = 'positive-weight'
@@ -74,8 +74,8 @@ def main():
 
                 print('Calculando caminho mínimo ...')
                 # iterate over all files in directory positive-weight
-                for filename in os.listdir('../graphs/positive-weight/'):
-                    file_path = os.path.join('../graphs/positive-weight/', filename)
+                for filename in os.listdir('./graphs/positive-weight/'):
+                    file_path = os.path.join('./graphs/positive-weight/', filename)
                     graph_qtd_nodes_num = filename.split('_')[0]  
                     graph_density = filename.split('_')[1][:3]
 
@@ -85,9 +85,9 @@ def main():
                         elif graph_density == '0.6' or graph_density == '0.5':
                             graph_density = 'sparse'
 
-                        result_file_dijkstra = open('../result/positive-weight/'+'dijkstra_'+graph_density+'.csv', 'a')
-                        result_file_bellman = open('../result/positive-weight/'+'bellman_'+graph_density+'.csv', 'a')
-                        result_file_floyd = open('../result/positive-weight/'+'floyd_'+graph_density+'.csv', 'a')
+                        result_file_dijkstra = open('./result/positive-weight/'+'dijkstra_'+graph_density+'.csv', 'a')
+                        result_file_bellman = open('./result/positive-weight/'+'bellman_'+graph_density+'.csv', 'a')
+                        result_file_floyd = open('./result/positive-weight/'+'floyd_'+graph_density+'.csv', 'a')
                         with open(file_path, 'r') as file:
 
                             for line in file:
@@ -140,10 +140,10 @@ def main():
                             file.close()
 
                 # iterate over all files in directory positive-negative-weight
-                for filename in os.listdir('../graphs/positive-negative-weight/'):
-                    file_path = os.path.join('../graphs/positive-negative-weight/', filename)
-                    result_file_bellman = open('../result/positive-negative-weight/'+'bellman'+'.csv', 'a')
-                    result_file_floyd = open('../result/positive-negative-weight/'+'floyd'+'.csv', 'a')
+                for filename in os.listdir('./graphs/positive-negative-weight/'):
+                    file_path = os.path.join('./graphs/positive-negative-weight/', filename)
+                    result_file_bellman = open('./result/positive-negative-weight/'+'bellman'+'.csv', 'a')
+                    result_file_floyd = open('./result/positive-negative-weight/'+'floyd'+'.csv', 'a')
                     graph_qtd_nodes_num = filename.split('_')[0]  
 
                     if os.path.isfile(file_path):

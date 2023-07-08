@@ -12,7 +12,7 @@ def plot():
 
     dataframes = []
 
-    path = '../result/positive-weight/'
+    path = './result/positive-weight/'
     # path = '../result/positive-negative-weight/'
     for file in file_names:
         df = pd.read_csv(path+file)

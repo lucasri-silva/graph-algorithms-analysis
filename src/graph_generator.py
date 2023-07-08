@@ -35,7 +35,7 @@ def generate_random_graph(num_nodes, num_edges, weight_range, density):
     return graph
 
 def write_graph_to_file(graph, num_nodes, density, path):
-    file_path = "../graphs/"+path+"/"+str(num_nodes)+"_"+str(density)+".json"
+    file_path = "./graphs/"+path+"/"+str(num_nodes)+"_"+str(density)+".json"
     file = open(file_path, 'a')
 
     adj_matrix = nx.adjacency_matrix(graph).todense()
